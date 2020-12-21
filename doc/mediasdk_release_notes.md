@@ -165,6 +165,8 @@ Please see the Intel® Media SDK Reference Manual for details *“&lt;sdk-instal
 
 Please also check the collateral materials: https://dgpu-docs.intel.com/devices/iris-xe-max-graphics/guides/media.html
 
+Please also check the collateral materials: https://dgpu-docs.intel.com/devices/iris-xe-max-graphics/guides/media.html
+
 ## <a id='GPU_Hang_Reporting_And_Recovery'>GPU Hang Reporting And Recovery</a>
 
 Intel® Media SDK supports reporting of GPU hangs occurred during SDK operations. This feature allows application to establish proper GPU hang recovery procedure without the need for additional monitoring of the system (e.g. without checking dmesg logs).
