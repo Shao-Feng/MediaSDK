@@ -38,7 +38,10 @@ LOCAL_C_INCLUDES := \
 
 LOCAL_CFLAGS := \
     $(MFX_CFLAGS_INTERNAL) \
-    -Wall -Werror
+    -Wno-error \
+    -Wno-unused-parameter \
+    -Wno-deprecated-declarations
+
 LOCAL_CFLAGS_32 := $(MFX_CFLAGS_INTERNAL_32)
 LOCAL_CFLAGS_64 := $(MFX_CFLAGS_INTERNAL_64)
 
@@ -62,7 +65,9 @@ LOCAL_C_INCLUDES := \
 
 LOCAL_CFLAGS := \
     $(MFX_CFLAGS_INTERNAL_HW) \
-    -Wall -Werror
+    -Wno-error \
+    -Wno-unused-parameter
+
 LOCAL_CFLAGS_32 := $(MFX_CFLAGS_INTERNAL_32)
 LOCAL_CFLAGS_64 := $(MFX_CFLAGS_INTERNAL_64)
 
