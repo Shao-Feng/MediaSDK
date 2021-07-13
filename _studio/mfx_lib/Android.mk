@@ -2,12 +2,12 @@ LOCAL_PATH:= $(MFX_HOME)/_studio
 
 # =============================================================================
 
-MFX_LOCAL_DECODERS := h265 h264 mpeg2 vc1 mjpeg vp8 vp9
+MFX_LOCAL_DECODERS := h265 h264 mpeg2 vc1 mjpeg vp8 vp9 av1
 MFX_LOCAL_ENCODERS := h265 h264 mjpeg vp9
 
 # Setting subdirectories to march thru
 MFX_LOCAL_DIRS := \
-    scheduler \
+    scheduler/linux \
     fei
 
 MFX_LOCAL_DIRS_IMPL := \
@@ -58,6 +58,7 @@ MFX_LOCAL_SRC_FILES_HW += \
     mfx_lib/encode_hw/hevc/agnostic/base/hevcehw_base_max_frame_size.cpp \
     mfx_lib/encode_hw/hevc/agnostic/base/hevcehw_base_packer.cpp \
     mfx_lib/encode_hw/hevc/agnostic/base/hevcehw_base_parser.cpp \
+    mfx_lib/encode_hw/hevc/agnostic/base/hevcehw_base_recon_info.cpp \
     mfx_lib/encode_hw/hevc/agnostic/base/hevcehw_base_roi.cpp \
     mfx_lib/encode_hw/hevc/agnostic/base/hevcehw_base_task.cpp \
     mfx_lib/encode_hw/hevc/agnostic/base/hevcehw_base_weighted_prediction.cpp \
@@ -75,6 +76,7 @@ MFX_LOCAL_SRC_FILES_HW += \
     mfx_lib/encode_hw/hevc/linux/base/hevcehw_base_weighted_prediction_lin.cpp \
     mfx_lib/encode_hw/hevc/linux/g12/hevcehw_g12_lin.cpp \
     mfx_lib/encode_hw/hevc/linux/g12/hevcehw_g12_rext_lin.cpp \
+    mfx_lib/encode_hw/hevc/linux/g12/hevcehw_g12_qp_modulation_lin.cpp \
     mfx_lib/encode_hw/shared/ehw_resources_pool.cpp \
     mfx_lib/encode_hw/shared/ehw_task_manager.cpp \
     mfx_lib/encode_hw/shared/ehw_device_vaapi.cpp \
@@ -103,7 +105,9 @@ MFX_LOCAL_INCLUDES_HW := \
     $(MFX_HOME)/_studio/mfx_lib/encode_hw/hevc/linux \
     $(MFX_HOME)/_studio/mfx_lib/encode_hw/hevc/linux/base \
     $(MFX_HOME)/_studio/mfx_lib/encode_hw/hevc/linux/g12 \
-    $(MFX_HOME)/_studio/mfx_lib/encode_hw/shared
+    $(MFX_HOME)/_studio/mfx_lib/encode_hw/shared \
+    $(MFX_HOME)/_studio/enctools/include \
+    $(MFX_HOME)/_studio/mfx_lib/scheduler/linux/include
 
 MFX_LOCAL_STATIC_LIBRARIES_HW := \
     libmfx_lib_merged_hw \
@@ -112,7 +116,8 @@ MFX_LOCAL_STATIC_LIBRARIES_HW := \
     libumc_io_merged_hw \
     libumc_core_merged_hw \
     libmfx_trace_hw \
-    libasc
+    libasc \
+    libaenc
 
 MFX_LOCAL_LDFLAGS_HW := \
     $(MFX_LDFLAGS) \
@@ -125,7 +130,7 @@ UMC_DIRS := \
     brc
 
 UMC_DIRS_IMPL := \
-    h265_dec h264_dec mpeg2_dec vc1_dec jpeg_dec vp9_dec \
+    h265_dec h264_dec mpeg2_dec vc1_dec jpeg_dec vp9_dec av1_dec \
     vc1_common jpeg_common
 
 UMC_LOCAL_INCLUDES := \
@@ -240,8 +245,8 @@ LOCAL_C_INCLUDES := \
     $(MFX_INCLUDES_INTERNAL_HW)
 
 LOCAL_CFLAGS := \
-    $(MFX_CFLAGS_INTERNAL_HW) \
-    -Wall -Werror -Wno-unused-parameter
+    $(MFX_CFLAGS_INTERNAL_HW)
+
 LOCAL_CFLAGS_32 := $(MFX_CFLAGS_INTERNAL_32)
 LOCAL_CFLAGS_64 := $(MFX_CFLAGS_INTERNAL_64)
 
@@ -265,8 +270,8 @@ LOCAL_C_INCLUDES := \
     $(MFX_INCLUDES_INTERNAL_HW)
 
 LOCAL_CFLAGS := \
-    $(MFX_CFLAGS_INTERNAL_HW) \
-    -Wall -Werror -Wno-unused-parameter
+    $(MFX_CFLAGS_INTERNAL_HW)
+
 LOCAL_CFLAGS_32 := $(MFX_CFLAGS_INTERNAL_32)
 
 LOCAL_LDFLAGS := $(MFX_LOCAL_LDFLAGS_HW)
@@ -299,8 +304,8 @@ LOCAL_C_INCLUDES := \
     $(MFX_INCLUDES_INTERNAL_HW)
 
 LOCAL_CFLAGS := \
-    $(MFX_CFLAGS_INTERNAL_HW) \
-    -Wall -Werror -Wno-unused-parameter
+    $(MFX_CFLAGS_INTERNAL_HW)
+
 LOCAL_CFLAGS_64 := $(MFX_CFLAGS_INTERNAL_64)
 
 LOCAL_LDFLAGS := $(MFX_LOCAL_LDFLAGS_HW)
